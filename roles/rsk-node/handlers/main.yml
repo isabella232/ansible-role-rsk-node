@@ -1,0 +1,6 @@
+---
+- name: Restart RSK
+  ansible.builtin.systemd:
+    name: rsk
+    state: restarted
+  become: yes
