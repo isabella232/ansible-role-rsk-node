@@ -1,7 +1,7 @@
 ---
 - name: Install OpenJDK
   ansible.builtin.apt:
-    name: "openjdk-{{ openjdk_version }}-jdk"
+    name: "openjdk-11-jdk"
     state: latest
     install_recommends: no
     update_cache: yes

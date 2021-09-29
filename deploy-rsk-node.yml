@@ -1,5 +1,5 @@
 ---
 - name: Deploy RSK node
-  hosts: rsk-node
+  hosts: all
   roles: 
     - rsk-node

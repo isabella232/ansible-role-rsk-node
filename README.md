@@ -14,7 +14,7 @@ Add the server(s) to the inventory, modify [variables](roles/rsk-node/vars/main.
 to suits your needs and run playbook like this:
 
 ```bash
-$ ansible-playbook -i inventory -u ubuntu deploy-rsk-node.yaml
+$ ansible-playbook -i inventory -u ubuntu deploy-rsk-node.yml
 ```
 
 Tasks
@@ -22,15 +22,16 @@ Tasks
 
 Installs and a configure a _released_ `rskj` version.
 
-- Installs the right OpenJDK
-- Adds `rsk` user for running `rskj`
-- Creates required directories and sets the right ownership
-- Fetches released RSK version and checks its PGP signature
-- Fetches a specific build of RSK available in some artifacts repo
-- Copies configuration files
-- Adds `rsk` SystemD service and ensures it's up and running
+- Installs OpenJDK.
+- Adds `rsk` user for running `rskj`.
+- Creates required directories and sets the right ownership.
+- Fetches released RSK version and checks its PGP signature.
+- Fetches a specific build of RSK available in some artifacts repo.
+- Copies configuration files.
+- Adds `rsk` SystemD service and ensures it's up and running.
 
-The following `group_vars` are used by this role:
+Group vars
+----------
 
 - `rsk_network`: the symbolic name of the network. Must be one of
   `MainNet`, `TestNet` or `RegTest`.
@@ -41,13 +42,13 @@ The following `group_vars` are used by this role:
 Files
 -----
 
-- `AEIDELMAN.txt`, `rsk-release-signing-key.asc`: PGP signing keys
+- `AEIDELMAN.txt`, `rsk-release-signing-key.asc`: PGP signing keys.
 - `logback.xml`: logging configuration file.
 
 Handlers
 --------
 
-- `Restart RSK`: triggered on JAR change or configurations changes
+- `Restart RSK`: triggered on JAR change or configurations changes.
 
 Templates
 ---------
@@ -58,23 +59,21 @@ Templates
 - `rsk.env.j2`: options for overriding `rsk.system` SystemD unit file
   values, to avoid running `systemctl daemon-reload` after modifying
   the service file.
-  `{{ inventory_hostname }}/rsk.env.j2`
 - `rsk.system.j2`: SystemD unit file for RSK.
 
-Vars
+Defaults
 ----
 
-- `openjdk_version`: either `8` or `11`
-- `rskj_install_dir`: where `rsk.jar` is stored
+- `rskj_install_dir`: where `rsk.jar` is stored.
 - `rskj_workdir`: where to download RSK JAR and PGP keys for
-  verification
-- `rskj_cfg_dir`: where RSK config files are stored
-- `rskj_data_dir`: where RSK DB is stored
-- `rskj_logs_dir`: where RSK logs are stored
+  verification.
+- `rskj_cfg_dir`: where RSK config files are stored.
+- `rskj_data_dir`: where RSK DB is stored.
+- `rskj_logs_dir`: where RSK logs are stored.
 
-- `rskj_release_download_base_url`: URLs to fetch the JAR
+- `rskj_release_download_base_url`: URLs to fetch the JAR.
 
 - `rskj_version_number`, `rskj_version_codename`: the RSK release
   version number and codename, used to compute the release tag and the
-  release JAR name
-- `rskj_release_tag`, `rskj_download_jar`: computed from previous
+  release JAR name.
+- `rskj_release_tag`, `rskj_download_jar`: computed from previous.
